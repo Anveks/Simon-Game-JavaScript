@@ -5,3 +5,23 @@
   box-sizing: border-box;
   font-family: sans-serif;
 }
+
+.game-cont {
+  display: flex;
+  flex-direction: row;
+}
+
+.color-cont {
+  margin: 0.5rem;
+  border-radius: 0.5rem;
+  width: 7rem;
+  height: 3rem;
+  background-color: red;
+  opacity: .8;
+  cursor: pointer;
+}
+
+.active {
+  opacity: 1;
+}
+
