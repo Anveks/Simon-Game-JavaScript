@@ -9,17 +9,24 @@
 <body>
 <h2>Simon Game</h2>
 
+<div class="controls">
+   <button class="btn-start">Start Game</button>
+   <button class="btn-reset">Reset</button>
+
+   <label>Difficulty: </label>
+   <select class="diff">
+     <option value="4" selected>easy</option>
+     <option value="6">medium</option>
+     <option value="8">hard</option>
+   </select>
+</div>
+
+
 <div class="score-cont">
   Your Score: <p class="score">0</p>
 </div>
 
-<button class="btn-start">Start Game</button>
-<button class="btn-reset">Reset</button>
-<select class="diff">
-  <option value="4" selected>easy</option>
-  <option value="6">medium</option>
-  <option value="8">hard</option>
-</select>
+
 
 <div class="game-cont"></div>
 

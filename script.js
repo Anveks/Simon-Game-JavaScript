@@ -4,9 +4,9 @@ const startBtn = document.querySelector(".btn-start");
 const sequence = [];
 const playersSequence = [];
 const gameCont = document.querySelector(".game-cont");
-let colorsNumber = document.querySelector(".diff").value;
+let colorsNumber = document.querySelector(".diff").value; // we take the value from the difficulty option
 
-for (let i = 0; i < colorsNumber; i++) {
+for (let i = 0; i < colorsNumber; i++) { // generate the color blocks according to the difficulty
   const color = document.createElement("div");
   color.classList.add("color-cont");
   color.classList.add(`n${i}`);
@@ -14,9 +14,13 @@ for (let i = 0; i < colorsNumber; i++) {
   gameCont.appendChild(color);
 };
 
-let timeout = colorsNumber;
+let timeout = colorsNumber; // set the timeot stop the same as the color blocks number
 
+// START GAME:
 startBtn.addEventListener("click", () => {
+
+  sequence.length = 0; // resetting the arrs
+  playersSequence.length = 0;
 
   const interval = setInterval(() => {
     if (timeout === 0) {
@@ -28,6 +32,8 @@ startBtn.addEventListener("click", () => {
       sequence.push(currentNumber); // remember the sequence 
       const currentElem = document.querySelector(`.n${currentNumber}`);
       currentElem.classList.add("active");
+
+      if (sequence.length === 4) console.log("Random sequence is: " + sequence); // TEST
   
       setTimeout(() => { 
         currentElem.classList.remove("active");
@@ -35,9 +41,8 @@ startBtn.addEventListener("click", () => {
     };
   }, 1000);
   
-  console.log(sequence);
-
 });
+
 
 document.querySelectorAll(".color-cont").forEach((elem, index) => {
   elem.setAttribute("disabled", false);
@@ -49,8 +54,20 @@ document.querySelectorAll(".color-cont").forEach((elem, index) => {
       document.querySelector(`.n${index}`).classList.remove("active");
      }, 800);
 
-    console.log(playersSequence);
+    if (playersSequence.length === 4) console.log("Player sequence is: " + playersSequence); // TEST
+
+    if (playersSequence.length === 4) {
+      if (JSON.stringify(playersSequence) === JSON.stringify(sequence)) {
+        document.querySelector(".score").innerHTML++;
+
+      }
+    }
+
   });
 });
+
+console.log(document.querySelector(".score").innerHTML); // score elem
+
+
 
 

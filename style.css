@@ -1,9 +1,22 @@
 
 * {
   padding: 0;
-  margin: 0;
+  margin: 1rem;
   box-sizing: border-box;
   font-family: sans-serif;
+}
+
+button, select {
+  padding: 1rem;
+  border: transparent;
+  border-radius: 15px;
+  background-color: rgb(204, 204, 204);
+}
+
+button:hover, select:hover {
+  transform: scale(1.1);
+  cursor: pointer;
+  transition: transform 0.5s;
 }
 
 .game-cont {
@@ -16,12 +29,29 @@
   border-radius: 0.5rem;
   width: 7rem;
   height: 3rem;
-  background-color: red;
   opacity: .8;
   cursor: pointer;
 }
 
+.color-cont:nth-child(1) {
+  background-color: red;
+}
+
+.color-cont:nth-child(2) {
+  background-color: blue;
+}
+
+.color-cont:nth-child(3) {
+  background-color: green;
+}
+
+.color-cont:nth-child(4) {
+  background-color: orange;
+}
+
 .active {
   opacity: 1;
+  transform: scale(1.05);
+  transition: transform 0.5s;
 }
 
