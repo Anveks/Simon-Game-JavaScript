@@ -21,10 +21,11 @@ startBtn.addEventListener("click", () => {
 
   sequence.length = 0; // resetting the arrs
   playersSequence.length = 0;
+  timeout = colorsNumber;
 
   const interval = setInterval(() => {
     if (timeout === 0) {
-      clearInterval(interval)
+      clearInterval(interval);
     } else {
       timeout -= 1;
   
@@ -33,7 +34,43 @@ startBtn.addEventListener("click", () => {
       const currentElem = document.querySelector(`.n${currentNumber}`);
       currentElem.classList.add("active");
 
-      if (sequence.length === 4) console.log("Random sequence is: " + sequence); // TEST
+      if (sequence.length === 4) {
+        console.log("Random sequence is: " + sequence); // TEST
+        
+        // only after the computer has ended it's turn, the colors become clickable for the player:
+        document.querySelectorAll(".color-cont").forEach((elem, index) => {
+        
+          elem.addEventListener("click", () => {
+            playersSequence.push(index);
+            console.log(playersSequence + "🔥");
+        
+            document.querySelector(`.n${index}`).classList.add("active");
+            setTimeout(() => { 
+              document.querySelector(`.n${index}`).classList.remove("active");
+             }, 800);
+        
+            if (playersSequence.length === 4) console.log("Player sequence is: " + playersSequence); // TEST
+        
+            // CHECKING WINNER 🎉
+            if (playersSequence.length === 4) {
+              if (JSON.stringify(playersSequence) === JSON.stringify(sequence)) {
+                document.querySelector(".score").innerHTML++;
+
+                document.querySelectorAll(".color-cont").forEach((elem, index) => { elem.removeEventListener("click", () => {}) });
+              } else {
+                alert("Oops, the sequence is wrong! Better luck next time.");
+                document.querySelector(".score").innerHTML = 0;
+                sequence.length = 0; // resetting the arrs
+                playersSequence.length = 0;
+                timeout = colorsNumber;
+
+                document.querySelectorAll(".color-cont").forEach((elem, index) => { elem.removeEventListener("click", () => {}) });
+              }
+            }
+        
+          });
+        });
+      }
   
       setTimeout(() => { 
         currentElem.classList.remove("active");
@@ -41,29 +78,6 @@ startBtn.addEventListener("click", () => {
     };
   }, 1000);
   
-});
-
-
-document.querySelectorAll(".color-cont").forEach((elem, index) => {
-  elem.setAttribute("disabled", false);
-  elem.addEventListener("click", () => {
-    playersSequence.push(index);
-
-    document.querySelector(`.n${index}`).classList.add("active");
-    setTimeout(() => { 
-      document.querySelector(`.n${index}`).classList.remove("active");
-     }, 800);
-
-    if (playersSequence.length === 4) console.log("Player sequence is: " + playersSequence); // TEST
-
-    if (playersSequence.length === 4) {
-      if (JSON.stringify(playersSequence) === JSON.stringify(sequence)) {
-        document.querySelector(".score").innerHTML++;
-
-      }
-    }
-
-  });
 });
 
 console.log(document.querySelector(".score").innerHTML); // score elem
