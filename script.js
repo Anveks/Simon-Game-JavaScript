@@ -16,6 +16,36 @@ for (let i = 0; i < colorsNumber; i++) { // generate the color blocks according 
 
 let timeout = colorsNumber; // set the timeot stop the same as the color blocks number
 
+function handlePlayersTurn(index) {
+  playersSequence.push(index);
+  console.log(playersSequence + "🔥");
+
+  document.querySelector(`.n${index}`).classList.add("active");
+  setTimeout(() => { 
+    document.querySelector(`.n${index}`).classList.remove("active");
+   }, 800);
+
+  if (playersSequence.length === 4) console.log("Player sequence is: " + playersSequence); // TEST
+
+  // CHECKING WINNER 🎉
+  if (playersSequence.length === 4) {
+    if (JSON.stringify(playersSequence) === JSON.stringify(sequence)) {
+      document.querySelector(".score").innerHTML++;
+
+      document.querySelectorAll(".color-cont").forEach((elem, index) => {
+        elem.removeEventListener("click", () => handlePlayersTurn(index));
+      });
+
+    } else {
+      alert("Oops, the sequence is wrong! Better luck next time.");
+      document.querySelector(".score").innerHTML = 0;
+      sequence.length = 0; // resetting the arrs
+      playersSequence.length = 0;
+      timeout = colorsNumber;
+    }
+  }
+}
+
 // START GAME:
 startBtn.addEventListener("click", () => {
 
@@ -39,36 +69,7 @@ startBtn.addEventListener("click", () => {
         
         // only after the computer has ended it's turn, the colors become clickable for the player:
         document.querySelectorAll(".color-cont").forEach((elem, index) => {
-        
-          elem.addEventListener("click", () => {
-            playersSequence.push(index);
-            console.log(playersSequence + "🔥");
-        
-            document.querySelector(`.n${index}`).classList.add("active");
-            setTimeout(() => { 
-              document.querySelector(`.n${index}`).classList.remove("active");
-             }, 800);
-        
-            if (playersSequence.length === 4) console.log("Player sequence is: " + playersSequence); // TEST
-        
-            // CHECKING WINNER 🎉
-            if (playersSequence.length === 4) {
-              if (JSON.stringify(playersSequence) === JSON.stringify(sequence)) {
-                document.querySelector(".score").innerHTML++;
-
-                document.querySelectorAll(".color-cont").forEach((elem, index) => { elem.removeEventListener("click", () => {}) });
-              } else {
-                alert("Oops, the sequence is wrong! Better luck next time.");
-                document.querySelector(".score").innerHTML = 0;
-                sequence.length = 0; // resetting the arrs
-                playersSequence.length = 0;
-                timeout = colorsNumber;
-
-                document.querySelectorAll(".color-cont").forEach((elem, index) => { elem.removeEventListener("click", () => {}) });
-              }
-            }
-        
-          });
+          elem.addEventListener("click", () => handlePlayersTurn(index));
         });
       }
   
