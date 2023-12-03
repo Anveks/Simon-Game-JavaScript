@@ -83,6 +83,7 @@ startBtn.addEventListener("click", () => {
 
 console.log(document.querySelector(".score").innerHTML); // score elem
 
+// number string boolean undefined null symbol bigint
 
 
 
