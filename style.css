@@ -24,28 +24,29 @@ button:hover, select:hover {
   flex-direction: row;
 }
 
-.color-cont {
+.color-block {
   margin: 0.5rem;
   border-radius: 0.5rem;
   width: 7rem;
   height: 3rem;
   opacity: .8;
   cursor: pointer;
+  transition: transform 0.5s;
 }
 
-.color-cont:nth-child(1) {
+.color-block:nth-child(1) {
   background-color: red;
 }
 
-.color-cont:nth-child(2) {
+.color-block:nth-child(2) {
   background-color: blue;
 }
 
-.color-cont:nth-child(3) {
+.color-block:nth-child(3) {
   background-color: green;
 }
 
-.color-cont:nth-child(4) {
+.color-block:nth-child(4) {
   background-color: orange;
 }
 

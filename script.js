@@ -1,87 +1,136 @@
 
-const startBtn = document.querySelector(".btn-start");
+class App {
 
-const sequence = [];
-const playersSequence = [];
-const gameCont = document.querySelector(".game-cont");
-let colorsNumber = document.querySelector(".diff").value; // we take the value from the difficulty option
+  computerSequence = [];
+  playersSequence = [];
+  colorsNumber = document.querySelector(".diff").value;
+  startBtn = document.querySelector(".btn-start");
 
-for (let i = 0; i < colorsNumber; i++) { // generate the color blocks according to the difficulty
-  const color = document.createElement("div");
-  color.classList.add("color-cont");
-  color.classList.add(`n${i}`);
-  color.setAttribute("disabled", true);
-  gameCont.appendChild(color);
-};
+  constructor(){
+    this.colorBlocks = [];
+    this.gameCont = document.querySelector(".game-cont");
 
-let timeout = colorsNumber; // set the timeot stop the same as the color blocks number
+    this.startBtn.addEventListener('click', this.startGame.bind(this));
+    this.renderColorBlocks();
+  };
 
-function handlePlayersTurn(index) {
-  playersSequence.push(index);
-  console.log(playersSequence + "🔥");
+  renderColorBlocks(){
+    for (let i = 0; i < this.colorsNumber; i++) {
+      const colorBlock = new ColorBlock();
+      this.gameCont.insertAdjacentElement("beforeend", colorBlock.element);
+      this.colorBlocks.push(colorBlock);
+    };
+  };
 
-  document.querySelector(`.n${index}`).classList.add("active");
-  setTimeout(() => { 
-    document.querySelector(`.n${index}`).classList.remove("active");
-   }, 800);
+  startGame() {
+    this.computersTurn();
+  };
 
-  if (playersSequence.length === 4) console.log("Player sequence is: " + playersSequence); // TEST
+  computersTurn() {
+    this.computerSequence = [];
 
-  // CHECKING WINNER 🎉
-  if (playersSequence.length === 4) {
-    if (JSON.stringify(playersSequence) === JSON.stringify(sequence)) {
-      document.querySelector(".score").innerHTML++;
+    const computerClick = new MouseEvent('click', {
+      bubbles: true,
+      cancelable: true,
+      view: window
+    });  
 
-      document.querySelectorAll(".color-cont").forEach((elem, index) => {
-        elem.removeEventListener("click", () => handlePlayersTurn(index));
-      });
-
-    } else {
-      alert("Oops, the sequence is wrong! Better luck next time.");
-      document.querySelector(".score").innerHTML = 0;
-      sequence.length = 0; // resetting the arrs
-      playersSequence.length = 0;
-      timeout = colorsNumber;
+    for (let i = 0; i < this.colorsNumber; i++) {
+      const randomNum = Math.floor(Math.random() * 4);
+      setTimeout(() => {
+        this.colorBlocks[randomNum].element.dispatchEvent(computerClick);
+      }, i * 1200); // delay each block's activation by i seconds
+      this.computerSequence.push(randomNum);
     }
+  }
+
+}
+
+class ColorBlock {
+  constructor(){
+    this.isActive = false; // Whether the block is active or not
+    this.element = document.createElement("div"); // The HTML element representing the block
+    this.element.classList.add("color-block");
+    this.element.addEventListener("click", this.toggleActive.bind(this)); // Bind click event handler
+  }
+
+  toggleActive() {
+    this.element.classList.toggle("active");
+    setTimeout(() =>  this.element.classList.toggle("active"), 1000);
   }
 }
 
-// START GAME:
-startBtn.addEventListener("click", () => {
+const app = new App();
 
-  sequence.length = 0; // resetting the arrs
-  playersSequence.length = 0;
-  timeout = colorsNumber;
+// let timeout = colorsNumber; // set the timeot stop the same as the color blocks number
 
-  const interval = setInterval(() => {
-    if (timeout === 0) {
-      clearInterval(interval);
-    } else {
-      timeout -= 1;
+// function handlePlayersTurn(index) {
+//   playersSequence.push(index);
+//   console.log(playersSequence + "🔥");
+
+//   document.querySelector(`.n${index}`).classList.add("active");
+//   setTimeout(() => { 
+//     document.querySelector(`.n${index}`).classList.remove("active");
+//    }, 800);
+
+//   if (playersSequence.length === 4) console.log("Player sequence is: " + playersSequence); // TEST
+
+//   // CHECKING WINNER 🎉
+//   if (playersSequence.length === 4) {
+//     if (JSON.stringify(playersSequence) === JSON.stringify(sequence)) {
+//       document.querySelector(".score").innerHTML++;
+
+//       document.querySelectorAll(".color-cont").forEach((elem, index) => {
+//         elem.removeEventListener("click", () => handlePlayersTurn(index));
+//       });
+
+//     } else {
+//       alert("Oops, the sequence is wrong! Better luck next time.");
+//       document.querySelector(".score").innerHTML = 0;
+//       sequence.length = 0; // resetting the arrs
+//       playersSequence.length = 0;
+//       timeout = colorsNumber;
+//     }
+//   }
+// }
+
+// // START GAME:
+// startBtn.addEventListener("click", () => {
+
+//   sequence.length = 0; // resetting the arrs
+//   playersSequence.length = 0;
+//   timeout = colorsNumber;
+
+//   const interval = setInterval(() => {
+//     if (timeout === 0) {
+//       clearInterval(interval);
+//     } else {
+//       timeout -= 1;
   
-      const currentNumber = Math.trunc(Math.random() * colorsNumber);
-      sequence.push(currentNumber); // remember the sequence 
-      const currentElem = document.querySelector(`.n${currentNumber}`);
-      currentElem.classList.add("active");
+//       const currentNumber = Math.trunc(Math.random() * colorsNumber);
+//       sequence.push(currentNumber); // remember the sequence 
+//       const currentElem = document.querySelector(`.n${currentNumber}`);
+//       currentElem.classList.add("active");
 
-      if (sequence.length === 4) {
-        console.log("Random sequence is: " + sequence); // TEST
+//       if (sequence.length === 4) {
+//         console.log("Random sequence is: " + sequence); // TEST
         
-        // only after the computer has ended it's turn, the colors become clickable for the player:
-        document.querySelectorAll(".color-cont").forEach((elem, index) => {
-          elem.addEventListener("click", () => handlePlayersTurn(index));
-        });
-      }
+//         // only after the computer has ended it's turn, the colors become clickable for the player:
+//         document.querySelectorAll(".color-cont").forEach((elem, index) => {
+//           elem.addEventListener("click", () => handlePlayersTurn(index));
+//           elem.removeEventListener('click', handlePlayersTurn)
+//         });
+//       }
   
-      setTimeout(() => { 
-        currentElem.classList.remove("active");
-       }, 800);
-    };
-  }, 1000);
+//       setTimeout(() => { 
+//         currentElem.classList.remove("active");
+//        }, 800);
+//     };
+//   }, 1000);
   
-});
+// });
 
-console.log(document.querySelector(".score").innerHTML); // score elem
+// console.log(document.querySelector(".score").innerHTML); // score elem
 
 // number string boolean undefined null symbol bigint
 
