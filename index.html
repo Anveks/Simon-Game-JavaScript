@@ -4,6 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Simon Game</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Carrois+Gothic+SC&family=Crete+Round:ital@0;1&family=DotGothic16&family=Pixelify+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -11,7 +14,6 @@
 
 <div class="controls">
    <button class="btn-start">Start Game</button>
-   <button class="btn-reset">Reset</button>
 
    <label>Difficulty: </label>
    <select class="diff">
@@ -23,7 +25,11 @@
 
 
 <div class="score-cont">
-  Your Score: <p class="score">0</p>
+  <div>
+    Your Score: <p class="score">0</p>
+  </div>
+  
+  <p class="turn"></p>
 </div>
 
 <div class="game-cont" disabled></div>

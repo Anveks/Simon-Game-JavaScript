@@ -3,7 +3,8 @@
   padding: 0;
   margin: 1rem;
   box-sizing: border-box;
-  font-family: sans-serif;
+  font-family: "Crete Round", serif;
+  font-size: 1.3rem;
 }
 
 button, select {
@@ -22,6 +23,10 @@ button:hover, select:hover {
 .game-cont {
   display: flex;
   flex-direction: row;
+  background-color: whitesmoke;
+  width: fit-content;
+  padding: 1rem;
+  border-radius: 10px;
 }
 
 .color-block {
@@ -51,6 +56,22 @@ button:hover, select:hover {
   background-color: orange;
 }
 
+.color-block:nth-child(5) {
+  background-color: purple; /* Different color */
+}
+
+.color-block:nth-child(6) {
+  background-color: teal; /* Different color */
+}
+
+.color-block:nth-child(7) {
+  background-color: pink; /* Different color */
+}
+
+.color-block:nth-child(8) {
+  background-color: gold; /* Different color */
+}
+
 .active {
   opacity: 1;
   transform: scale(1.05);
@@ -58,8 +79,22 @@ button:hover, select:hover {
 }
 
 .unclickable {
-  background-color: red;
   cursor: default; /* Change cursor to default */
   pointer-events: none; /* Disable pointer events */
 }
 
+.score-cont {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.score-cont > div {
+  display: flex;
+  align-items: center;
+}
+
+.bump {
+  transform: scale(1.1);
+  transition: 3ms;
+}
