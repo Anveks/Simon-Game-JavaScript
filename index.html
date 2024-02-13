@@ -10,29 +10,39 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<h2>Simon Game</h2>
 
-<div class="controls">
-   <button class="btn-start">Start Game</button>
-
-   <label>Difficulty: </label>
-   <select class="diff">
-     <option value="4" selected>easy</option>
-     <option value="6">medium</option>
-     <option value="8">hard</option>
-   </select>
-</div>
-
-
-<div class="score-cont">
-  <div>
-    Your Score: <p class="score">0</p>
+  <div class="main">
+    <h2>Simon Game</h2>
+    <div class="controls">
+      <!-- SCORE -->
+      <div class="score-cont">
+        <div>
+          Your Score: <p class="score">0</p>
+        </div>
+      </div>
+    
+      <!-- START GAME -->
+      <div class="start">
+          <button class="btn-start"> &rarr; Start &larr;</button>
+      </div>
+    
+    
+       <!-- DIFF -->
+       <div class="diff-cont">
+          <!-- <label>Difficulty: </label> -->
+          <select class="diff">
+            <option value="4" selected>EASY</option>
+            <option value="6">MEDIUM</option>
+            <option value="8">HARD</option>
+        </select>
+       </div>
+    
+    </div>
+    
+    <p class="turn">Try to remember all the colors you see.</p>
+    <div class="game-cont" disabled></div>
+    
   </div>
-  
-  <p class="turn"></p>
-</div>
-
-<div class="game-cont" disabled></div>
 
 </body>
 <script src="script.js" defer></script>

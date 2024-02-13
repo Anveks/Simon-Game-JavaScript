@@ -98,8 +98,9 @@ class App {
   }
 
   toggleTurn() {
-    this.turn.classList.add('bump');
-    this.turn.classList.remove('bump');
+    this.turn.classList.add('slide-in-bottom');
+    setTimeout(() =>     this.turn.classList.remove('slide-in-bottom'), 100)
+    // this.turn.classList.remove('slide-in-bottom');
   }
 
   checkSequence(player, computer) {

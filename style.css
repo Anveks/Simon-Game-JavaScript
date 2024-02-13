@@ -1,17 +1,87 @@
 
 * {
+  margin: 0;
   padding: 0;
-  margin: 1rem;
   box-sizing: border-box;
   font-family: "Crete Round", serif;
   font-size: 1.3rem;
+  color: #333;
+}
+
+html, body {
+  height: 100%; /* Change max-height to height */
+  padding: 0;
+  background: linear-gradient(to top left, #b0bec5, #eff2f5);
+}
+
+body {
+  background-color: white;
+}
+
+h2 {
+  text-align: center;
+  margin: 1.5rem 0;
+}
+
+.controls {
+  /* background-color: #f7f7f7; */
+  display: flex;
+  align-items: center;
+  /* gap: 2rem; */
+  width: fit-content;
+  margin: 0 auto;
+
+  animation-name: slideInBottom;
+  animation-duration: 1s;
+  animation-timing-function: ease-in-out;
+}
+
+/* SCORE */
+.score-cont {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #FFC71F;
+  width: 12vw;
+  height: 10vh;
+  border-radius: 10px 0 0 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+  padding: 0.3rem;
+}
+
+.score-cont > div {
+  display: flex;
+  align-items: center;
+}
+
+/* START */
+.start {
+  background-color: #FFA21F;
+  width: 20vw;
+  height: 15vh;
+  padding: 0.5em;
+  display: flex;
+  justify-content: center;
+  align-self: center;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.diff-cont {
+  background-color: #FFC71F;
+  width: 12vw;
+  height: 10vh;
+  border-radius: 0 10px 10px 0;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+  padding: 0.3rem;
 }
 
 button, select {
-  padding: 1rem;
+  padding: .5rem;
   border: transparent;
   border-radius: 15px;
-  background-color: rgb(204, 204, 204);
+  /* background-color: rgb(204, 204, 204); */
+  background-color: transparent;
 }
 
 button:hover, select:hover {
@@ -27,6 +97,33 @@ button:hover, select:hover {
   width: fit-content;
   padding: 1rem;
   border-radius: 10px;
+  margin: 3rem auto;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+
+  animation-name: slideInBottom;
+  animation-duration: 1.5s;
+  animation-timing-function: ease-in-out;
+}
+
+.main {
+  background-color: rgba(245, 245, 245, 0.3); /* Adjust the RGB values and opacity (fourth value) as needed */
+  width: fit-content;
+  margin: 0 auto;
+  padding: .5rem;
+  border-radius: 10px;
+}
+
+
+.turn {
+  background-color: whitesmoke;
+  width: fit-content;
+  padding: 1rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+  margin: 2rem auto;
+  animation-name: slideInBottom;
+  animation-duration: 0.5s;
+  animation-timing-function: ease-in-out;
 }
 
 .color-block {
@@ -83,18 +180,21 @@ button:hover, select:hover {
   pointer-events: none; /* Disable pointer events */
 }
 
-.score-cont {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+/* ANIMATIONS */
+
+.slide-in-bottom {
+  animation-name: slideInBottom;
+  animation-duration: 0.5s;
+  animation-timing-function: ease-in-out;
 }
 
-.score-cont > div {
-  display: flex;
-  align-items: center;
-}
-
-.bump {
-  transform: scale(1.1);
-  transition: 3ms;
+@keyframes slideInBottom {
+  from {
+    transform: translateY(10%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
