@@ -32,6 +32,7 @@ button:hover, select:hover {
   opacity: .8;
   cursor: pointer;
   transition: transform 0.5s;
+  cursor: pointer;
 }
 
 .color-block:nth-child(1) {
@@ -54,5 +55,11 @@ button:hover, select:hover {
   opacity: 1;
   transform: scale(1.05);
   transition: transform 0.5s;
+}
+
+.unclickable {
+  background-color: red;
+  cursor: default; /* Change cursor to default */
+  pointer-events: none; /* Disable pointer events */
 }
 

@@ -27,21 +27,31 @@ class App {
   };
 
   computersTurn() {
-    this.computerSequence = [];
-
-    const computerClick = new MouseEvent('click', {
-      bubbles: true,
-      cancelable: true,
-      view: window
-    });  
+    this.computerSequence = []; // clear the sequence arr
+    this.toggleInterface();
 
     for (let i = 0; i < this.colorsNumber; i++) {
       const randomNum = Math.floor(Math.random() * 4);
       setTimeout(() => {
-        this.colorBlocks[randomNum].element.dispatchEvent(computerClick);
+        this.colorBlocks[randomNum].toggleActive();
+        console.log('this is from the first set timeout');
       }, i * 1200); // delay each block's activation by i seconds
-      this.computerSequence.push(randomNum);
+      this.computerSequence.push(randomNum); 
     }
+
+    setTimeout(() => this.toggleInterface(), 1200 * this.colorsNumber); // the interface is enabled again after all the code in the loop finishes
+  };
+
+  toggleInterface() {
+    this.gameCont.classList.toggle("unclickable");
+  }
+
+  playersTurn() {
+    // players turn logic
+  };
+
+  checkSequence() {
+    // check the sequence
   }
 
 }
@@ -55,9 +65,11 @@ class ColorBlock {
   }
 
   toggleActive() {
+    console.log('clicked');
     this.element.classList.toggle("active");
     setTimeout(() =>  this.element.classList.toggle("active"), 1000);
   }
+
 }
 
 const app = new App();
